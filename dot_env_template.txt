@@ -1,0 +1,137 @@
+# MyInventoryApp — .env.local Template (Web v1)
+#
+# COPY THIS FILE to: ~/Projects/MyInventoryApp/web/.env.local
+# THEN fill in actual values from each service's dashboard.
+# NEVER commit this file to git. Next.js gitignores .env.local by default.
+#
+# Variables prefixed with NEXT_PUBLIC_ are exposed to the browser.
+# Everything else is server-only (used by Edge Functions / API routes).
+
+
+# ============================================================================
+# SUPABASE
+# ============================================================================
+# From: https://app.supabase.com → your project → Settings → API
+# - URL: shown as "Project URL"
+# - ANON_KEY: under "Project API keys" → labeled "anon" / "public" — safe in browser
+# - SERVICE_ROLE_KEY: under "Project API keys" → labeled "service_role" — SERVER ONLY
+# - DB_PASSWORD: the password you set during project creation (used by supabase CLI)
+
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbG...REPLACE_ME
+SUPABASE_SERVICE_ROLE_KEY=eyJhbG...REPLACE_ME_SENSITIVE
+SUPABASE_DB_PASSWORD=YOUR_DB_PASSWORD_FROM_PROJECT_CREATION
+SUPABASE_PROJECT_REF=YOUR_PROJECT_REF
+
+
+# ============================================================================
+# STRIPE (for $9.99 / 1,000 scan pack purchases)
+# ============================================================================
+# From: https://dashboard.stripe.com → Developers → API keys
+# Use TEST keys (sk_test_..., pk_test_...) until you're ready for real charges
+# - PUBLISHABLE_KEY: safe in browser
+# - SECRET_KEY: server-only, used in Edge Functions / Next.js API routes
+# - WEBHOOK_SECRET: from Developers → Webhooks → your endpoint → "Signing secret"
+# - PRICE_ID_SCAN_PACK: created in Stripe Dashboard → Products. $9.99 one-time.
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...REPLACE_ME
+STRIPE_SECRET_KEY=sk_test_...REPLACE_ME_SENSITIVE
+STRIPE_WEBHOOK_SECRET=whsec_...REPLACE_ME
+NEXT_PUBLIC_STRIPE_PRICE_ID_SCAN_PACK=price_...REPLACE_ME
+
+
+# ============================================================================
+# ANTHROPIC API (for cloud vision + AI calls)
+# ============================================================================
+# From: https://console.anthropic.com/ → Settings → API Keys → Create Key
+# Used in Supabase Edge Functions for image classification
+
+ANTHROPIC_API_KEY=sk-ant-...REPLACE_ME
+
+
+# ============================================================================
+# OPENAI API (for embeddings + text classification + alternative vision)
+# ============================================================================
+# From: https://platform.openai.com/api-keys → Create new secret key
+# Used for embeddings (text-embedding-3-small) and text classification
+
+OPENAI_API_KEY=sk-proj-...REPLACE_ME
+
+
+# ============================================================================
+# VERCEL DEPLOY (for `vercel` CLI; set after `vercel login`)
+# ============================================================================
+# Optional — only needed if scripting deploys; interactive `vercel` login also works
+
+# VERCEL_TOKEN=...REPLACE_ME
+
+
+# ============================================================================
+# GITHUB (for the GitHub MCP server / CI later)
+# ============================================================================
+# From: https://github.com/settings/tokens → Generate new token (classic)
+# Scopes needed: repo, workflow, read:user
+
+GITHUB_TOKEN=ghp_...REPLACE_ME
+GITHUB_USERNAME=YOUR_GITHUB_USERNAME
+
+
+# ============================================================================
+# COST ALERTS (ntfy.sh or Pushover)
+# ============================================================================
+# Pick ONE of these alerting paths.
+#
+# ntfy.sh (free, simple, no account needed):
+#   1. Pick a hard-to-guess topic name like 'myapp-cost-alerts-x7k2p9'
+#   2. Subscribe in the ntfy.sh phone app
+#   3. Edge Functions POST to https://ntfy.sh/YOUR_TOPIC
+#
+# Pushover (free trial, $5 one-time after, more reliable):
+#   1. Sign up at https://pushover.net/
+#   2. Get USER_KEY from main dashboard
+#   3. Create an app, get APP_TOKEN
+
+NTFY_TOPIC=myapp-cost-alerts-CHANGE_THIS_TO_SOMETHING_RANDOM
+
+# PUSHOVER_USER_KEY=...REPLACE_ME
+# PUSHOVER_APP_TOKEN=...REPLACE_ME
+
+
+# ============================================================================
+# SENTRY (optional, crash reporting — add later in v1.x)
+# ============================================================================
+# From: https://sentry.io → your project → Settings → Client Keys (DSN)
+
+# NEXT_PUBLIC_SENTRY_DSN=https://...@sentry.io/...
+
+
+# ============================================================================
+# AI MODEL CONFIGURATION (tunable, see foundation doc Section 12)
+# ============================================================================
+
+VISION_CONFIDENCE_THRESHOLD=0.7
+EMBEDDING_SIMILARITY_THRESHOLD=0.85
+USER_CATEGORY_SIMILARITY_THRESHOLD=0.7
+EMBEDDING_MODEL=text-embedding-3-small
+
+
+# ============================================================================
+# CREDIT COSTS (locked, see foundation doc Section 12)
+# ============================================================================
+
+CREDIT_COST_CLOUD_VISION=5
+CREDIT_COST_TEXT_CLASSIFY=1
+CREDIT_COST_EMBEDDING=1
+FREE_TIER_CREDITS=20
+SCAN_PACK_CREDITS=1000
+
+
+# ============================================================================
+# REMINDER
+# ============================================================================
+# This file lives in: ~/Projects/MyInventoryApp/web/.env.local
+# Next.js gitignores it by default.
+# If you accidentally commit it, immediately:
+#   1. Rotate every key listed above
+#   2. Use git filter-repo or BFG to remove from history
+#   3. Force-push (carefully) and notify any collaborators
