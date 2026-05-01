@@ -20,7 +20,7 @@ export type LocalItem = {
   name: string;
   notes?: string | null;
   quantity: number;
-  photoBlobId?: string | null;
+  primaryPhotoBlob?: Blob | null;
   createdAt: string;
   updatedAt: string;
   syncStatus: "synced" | "pending" | "failed";

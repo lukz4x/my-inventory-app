@@ -45,9 +45,9 @@ export function HomeClient() {
                 <Search className="size-4" aria-hidden="true" />
                 Search
               </ButtonLink>
-              <ButtonLink href="/onboarding">
+              <ButtonLink href="/capture">
                 <Plus className="size-4" aria-hidden="true" />
-                Add space
+                Add item
               </ButtonLink>
             </div>
           </div>

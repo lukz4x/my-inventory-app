@@ -36,7 +36,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
               <Home className="size-5" aria-hidden="true" />
             </Link>
             <Link
-              href="/home?capture=1"
+              href="/capture"
               className="inline-flex h-12 items-center justify-center rounded-full bg-zinc-950 text-white shadow-sm"
               aria-label="Capture item"
             >

@@ -22,7 +22,7 @@ export default async function SpaceDetailPage({
             the next build steps land.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <ButtonLink href="/home?capture=1">
+            <ButtonLink href="/capture">
               <Camera className="size-4" aria-hidden="true" />
               Capture item
             </ButtonLink>
