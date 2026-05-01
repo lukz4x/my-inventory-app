@@ -1,5 +1,5 @@
-const CACHE_NAME = "myinventoryapp-shell-v1";
-const APP_SHELL = ["/", "/home", "/search", "/capture"];
+const CACHE_NAME = "myinventoryapp-shell-v2";
+const APP_SHELL = ["/home", "/search", "/capture"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
