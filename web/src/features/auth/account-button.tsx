@@ -18,20 +18,17 @@ export function AccountButton() {
     window.location.href = "/login";
   }
 
-  if (isLoading) {
-    return (
-      <span className="inline-flex size-10 animate-pulse rounded-full bg-white/75 ring-1 ring-zinc-950/10" />
-    );
-  }
-
   if (!user) {
     return (
       <Link
         href="/login"
-        className="inline-flex size-10 items-center justify-center rounded-full bg-white/75 text-zinc-700 ring-1 ring-zinc-950/10"
+        className="inline-flex items-center gap-2 rounded-full bg-white/75 px-3 py-2 text-zinc-700 ring-1 ring-zinc-950/10 transition-all duration-200 hover:bg-white"
         aria-label="Sign in"
       >
         <UserCircle className="size-5" aria-hidden="true" />
+        <span className="hidden text-sm font-medium sm:inline">
+          {isLoading ? "Account" : "Sign in"}
+        </span>
       </Link>
     );
   }
