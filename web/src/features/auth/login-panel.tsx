@@ -3,6 +3,7 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { AlertCircle } from "lucide-react";
+import { useEffect } from "react";
 import { hasSupabaseBrowserEnv } from "@/lib/env";
 import { createSupabaseBrowserClient } from "@/lib/supabase";
 import { GlassPanel } from "@/components/ui/glass-panel";
@@ -25,7 +26,19 @@ export function LoginPanel() {
     );
   }
 
+  return <ConfiguredLoginPanel />;
+}
+
+function ConfiguredLoginPanel() {
   const supabase = createSupabaseBrowserClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        window.location.href = "/home";
+      }
+    });
+  }, [supabase.auth]);
 
   return (
     <GlassPanel className="p-4">

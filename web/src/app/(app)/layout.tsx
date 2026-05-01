@@ -1,9 +1,20 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
 import { Camera, Home, Search } from "lucide-react";
 import { AccountButton } from "@/features/auth/account-button";
+import { createSupabaseServerClient } from "@/lib/supabase-server";
 
-export default function AppLayout({ children }: { children: ReactNode }) {
+export default async function AppLayout({ children }: { children: ReactNode }) {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
   return (
     <div className="min-h-dvh bg-[#f5f2ed] text-zinc-950">
       <div className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col">
