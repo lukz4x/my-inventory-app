@@ -20,6 +20,8 @@ export type LocalItem = {
   name: string;
   notes?: string | null;
   quantity: number;
+  useCount: number;
+  lastUsedAt?: string | null;
   primaryPhotoBlob?: Blob | null;
   createdAt: string;
   updatedAt: string;

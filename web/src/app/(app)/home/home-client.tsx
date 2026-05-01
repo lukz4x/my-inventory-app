@@ -4,7 +4,9 @@ import { AlertCircle, Plus, Search } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { SpaceCard } from "@/components/space/space-card";
+import { ItemRow } from "@/components/item/item-row";
 import { useSpaces } from "@/hooks/use-spaces";
+import { useLocalItems } from "@/hooks/use-local-items";
 import { hasSupabaseBrowserEnv } from "@/lib/env";
 
 const fallbackSpaces = [
@@ -24,6 +26,7 @@ const fallbackSpaces = [
 
 export function HomeClient() {
   const { spaces, isLoading, error } = useSpaces();
+  const { items } = useLocalItems();
   const visibleSpaces = spaces.length > 0 ? spaces : fallbackSpaces;
   const needsSupabase = !hasSupabaseBrowserEnv();
 
@@ -90,6 +93,27 @@ export function HomeClient() {
             {visibleSpaces.map((space, index) => (
               <SpaceCard key={space.id} space={space} index={index} />
             ))}
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-3 flex items-end justify-between">
+            <div>
+              <h2 className="text-xl font-semibold">Recent Items</h2>
+              <p className="text-sm text-zinc-600">
+                {items.length > 0 ? `${items.length} saved locally` : "No items yet"}
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-2">
+            {items.slice(0, 6).map((item) => (
+              <ItemRow key={item.id} item={item} />
+            ))}
+            {items.length === 0 ? (
+              <GlassPanel className="p-4 text-sm text-zinc-600">
+                Capture your first item to see it here.
+              </GlassPanel>
+            ) : null}
           </div>
         </section>
       </div>

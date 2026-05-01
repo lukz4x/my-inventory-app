@@ -105,6 +105,8 @@ export function CaptureClient() {
       name: name.trim(),
       notes: notes.trim() || null,
       quantity: 1,
+      useCount: 0,
+      lastUsedAt: null,
       primaryPhotoBlob: photoBlob,
       createdAt: now,
       updatedAt: now,
