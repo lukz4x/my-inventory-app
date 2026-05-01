@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Camera, Home, Search, UserCircle } from "lucide-react";
+import { Camera, Home, Search } from "lucide-react";
+import { AccountButton } from "@/features/auth/account-button";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,13 +15,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
               </span>
               MyInventoryApp
             </Link>
-            <Link
-              href="/login"
-              className="inline-flex size-10 items-center justify-center rounded-full bg-white/75 text-zinc-700 ring-1 ring-zinc-950/10"
-              aria-label="Account"
-            >
-              <UserCircle className="size-5" aria-hidden="true" />
-            </Link>
+            <AccountButton />
           </div>
         </header>
 
