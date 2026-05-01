@@ -59,7 +59,7 @@ export function LoginPanel() {
         redirectTo={
           typeof window === "undefined"
             ? undefined
-            : `${window.location.origin}/onboarding`
+            : `${window.location.origin}/auth/callback?next=/onboarding`
         }
         view="sign_in"
       />
