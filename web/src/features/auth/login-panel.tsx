@@ -68,7 +68,7 @@ function ConfiguredLoginPanel() {
             },
           },
         }}
-        providers={["apple", "google"]}
+        providers={["google"]}
         redirectTo={
           typeof window === "undefined"
             ? undefined
