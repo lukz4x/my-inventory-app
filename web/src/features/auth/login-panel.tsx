@@ -4,7 +4,7 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { AlertCircle } from "lucide-react";
 import { useEffect } from "react";
-import { hasSupabaseBrowserEnv } from "@/lib/env";
+import { getSiteUrl, hasSupabaseBrowserEnv } from "@/lib/env";
 import { createSupabaseBrowserClient } from "@/lib/supabase";
 import { GlassPanel } from "@/components/ui/glass-panel";
 
@@ -69,11 +69,7 @@ function ConfiguredLoginPanel() {
           },
         }}
         providers={["google"]}
-        redirectTo={
-          typeof window === "undefined"
-            ? undefined
-            : `${window.location.origin}/auth/callback?next=/onboarding`
-        }
+        redirectTo={`${getSiteUrl()}/auth/callback?next=/onboarding`}
         view="sign_in"
       />
     </GlassPanel>

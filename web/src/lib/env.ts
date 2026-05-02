@@ -5,6 +5,13 @@ export function getSupabaseBrowserEnv() {
   };
 }
 
+export function getSiteUrl() {
+  return (
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (typeof window === "undefined" ? "" : window.location.origin)
+  ).replace(/\/$/, "");
+}
+
 export function hasSupabaseBrowserEnv() {
   const { url, anonKey } = getSupabaseBrowserEnv();
   return Boolean(
